@@ -78,6 +78,14 @@
                          0 2px 4px rgba(0, 0, 0, 0.7);
         }
 
+        /* ==================== SEPARADORES ELEGANTES ==================== */
+        .separator {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #d4af37, transparent);
+            margin: 2.5rem 0;
+            border: none;
+        }
+
         /* CARRUSEL */
         .auto-gallery {
             position: relative;
@@ -86,14 +94,7 @@
             border-radius: 1rem;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
         }
-        .auto-gallery .slides {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
         .auto-gallery .slides img {
-            position: absolute;
-            inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -131,7 +132,9 @@
     <h1 class="logo-font text-4xl sm:text-5xl font-bold text-center mb-12 tracking-wider">
         MENÚ
     </h1>
-    <div class="space-y-6 sm:space-y-7">
+    
+    <div class="space-y-8"> <!-- Aumenté el espacio entre secciones -->
+        
         <!-- 1 ENTRADAS -->
         <button data-modal="entradas" class="category-card w-full aspect-video relative">
             <div class="category-image-container">
@@ -143,6 +146,7 @@
                 </div>
             </div>
         </button>
+        <hr class="separator">
 
         <!-- 2 ROLLOS -->
         <button data-modal="rollos" class="category-card w-full aspect-video relative">
@@ -155,6 +159,7 @@
                 </div>
             </div>
         </button>
+        <hr class="separator">
 
         <!-- 3 PLATILLOS -->
         <button data-modal="platillos" class="category-card w-full aspect-video relative">
@@ -167,6 +172,7 @@
                 </div>
             </div>
         </button>
+        <hr class="separator">
 
         <!-- 4 BEBIDAS -->
         <button data-modal="bebidas" class="category-card w-full aspect-video relative">
@@ -179,6 +185,7 @@
                 </div>
             </div>
         </button>
+        <hr class="separator">
 
         <!-- 5 COMBOS -->
         <button data-modal="combos" class="category-card w-full aspect-video relative">
@@ -191,6 +198,7 @@
                 </div>
             </div>
         </button>
+        <hr class="separator">
 
         <!-- 6 MENÚ INFANTIL -->
         <button data-modal="infantil" class="category-card w-full aspect-video relative">
@@ -203,6 +211,7 @@
                 </div>
             </div>
         </button>
+        <hr class="separator">
 
         <!-- 7 POSTRES -->
         <button data-modal="postres" class="category-card w-full aspect-video relative">
@@ -215,6 +224,7 @@
                 </div>
             </div>
         </button>
+        <hr class="separator">
 
         <!-- 8 ESPECIALES -->
         <button data-modal="especiales" class="category-card w-full aspect-video relative">
@@ -227,29 +237,25 @@
                 </div>
             </div>
         </button>
+
     </div>
 </main>
 
 <script>
-// Carrusel automático cada 3 segundos
+// Carrusel (por si lo usas en los modales)
 document.addEventListener('DOMContentLoaded', function() {
     const galleries = document.querySelectorAll('.auto-gallery');
-    
     galleries.forEach(gallery => {
         const slides = gallery.querySelectorAll('.slides img');
         let current = 0;
-
         function nextSlide() {
             slides[current].classList.remove('active');
             current = (current + 1) % slides.length;
             slides[current].classList.add('active');
         }
-
-        if (slides.length > 0) {
+        if (slides.length > 1) {
             slides[0].classList.add('active');
-            if (slides.length > 1) {
-                setInterval(nextSlide, 3000);
-            }
+            setInterval(nextSlide, 3000);
         }
     });
 });
