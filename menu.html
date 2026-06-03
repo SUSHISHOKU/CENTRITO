@@ -12,23 +12,20 @@
         html, body {
             font-family: 'Poppins', sans-serif;
             background-image: url('FONDOT.png');
-            background-size: 100% auto;           /* Mejor para imágenes verticales */
+            background-size: 100% auto;           /* Ancho completo, altura según proporción */
             background-position: center top;
-            background-repeat: no-repeat;
+            background-repeat: repeat-y;          /* ← DUPLICAMOS verticalmente */
             background-attachment: fixed;
-            background-color: #000;               /* Fallback negro */
+            background-color: #000;
             min-height: 100vh;
             min-height: -webkit-fill-available;
             color: #ffffff;
             margin: 0;
         }
 
-        /* Corrección para pantallas más anchas */
-        @media (min-width: 768px) {
-            html, body {
-                background-size: auto 100%;
-                background-position: left center;
-            }
+        /* Aseguramos que nada tape el fondo */
+        main, .max-w-5xl, .space-y-6 {
+            background: transparent !important;
         }
 
         .logo-font {
@@ -43,7 +40,7 @@
             overflow: hidden;
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             padding: 12px;
-            background: rgba(0, 0, 0, 0.35);
+            background: rgba(0, 0, 0, 0.35) !important;
         }
       
         .category-card.appear {
@@ -64,57 +61,26 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s ease;
         }
 
-        .category-label {
-            text-align: center;
-            padding: 8px 0;
-        }
         .category-label h2 {
             font-size: 1.75rem;
             font-weight: 500;
-            letter-spacing: 0.04em;
-            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.9),
-                         0 2px 4px rgba(0, 0, 0, 0.7);
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.9);
         }
 
-        /* CARRUSEL */
-        .auto-gallery {
-            position: relative;
-            height: 220px;
-            overflow: hidden;
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-        }
-        .auto-gallery .slides img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* MODAL - Igual que antes pero consistente */
+        /* MODAL */
         .modal {
             background-image: url('FONDOT.png');
             background-size: 100% auto;
             background-position: center top;
-            background-repeat: no-repeat;
+            background-repeat: repeat-y;
             background-attachment: fixed;
         }
-       
-        .modal.show {
-            opacity: 1;
-            transform: scale(1);
-        }
-        .modal-content {
-            background: rgba(5, 5, 15, 0.88);
-            backdrop-filter: blur(14px);
-        }
 
-        /* RESPONSIVE */
+        /* Responsive */
         @media (max-width: 768px) {
             .category-card { padding: 8px; margin-bottom: 1rem; }
-            .category-image-container { border-radius: 1.25rem; }
             .category-label h2 { font-size: 1.5rem; }
         }
     </style>
@@ -137,7 +103,7 @@
         MENÚ
     </h1>
     <div class="space-y-6 sm:space-y-7">
-        <!-- Todas tus cards aquí (las dejé completas) -->
+        <!-- 1 ENTRADAS -->
         <button data-modal="entradas" class="category-card w-full aspect-video relative">
             <div class="category-image-container">
                 <img src="ENTRADAS.png" class="w-full h-full object-cover">
@@ -149,6 +115,7 @@
             </div>
         </button>
 
+        <!-- 2 ROLLOS -->
         <button data-modal="rollos" class="category-card w-full aspect-video relative">
             <div class="category-image-container">
                 <img src="ROLLOS.png" class="w-full h-full object-cover">
@@ -160,6 +127,7 @@
             </div>
         </button>
 
+        <!-- 3 PLATILLOS -->
         <button data-modal="platillos" class="category-card w-full aspect-video relative">
             <div class="category-image-container">
                 <img src="TEPPAN.png" class="w-full h-full object-cover">
@@ -171,6 +139,7 @@
             </div>
         </button>
 
+        <!-- 4 BEBIDAS -->
         <button data-modal="bebidas" class="category-card w-full aspect-video relative">
             <div class="category-image-container">
                 <img src="BEBIDAS.png" class="w-full h-full object-cover">
@@ -182,6 +151,7 @@
             </div>
         </button>
 
+        <!-- 5 COMBOS -->
         <button data-modal="combos" class="category-card w-full aspect-video relative">
             <div class="category-image-container">
                 <img src="COMBOS.png" class="w-full h-full object-cover">
@@ -193,6 +163,7 @@
             </div>
         </button>
 
+        <!-- 6 MENÚ INFANTIL -->
         <button data-modal="infantil" class="category-card w-full aspect-video relative">
             <div class="category-image-container">
                 <img src="KIDS.png" class="w-full h-full object-cover">
@@ -204,6 +175,7 @@
             </div>
         </button>
 
+        <!-- 7 POSTRES -->
         <button data-modal="postres" class="category-card w-full aspect-video relative">
             <div class="category-image-container">
                 <img src="POSTRES.png" class="w-full h-full object-cover">
@@ -215,6 +187,7 @@
             </div>
         </button>
 
+        <!-- 8 ESPECIALES -->
         <button data-modal="especiales" class="category-card w-full aspect-video relative">
             <div class="category-image-container">
                 <img src="ESPECIALES.png" class="w-full h-full object-cover">
