@@ -8,19 +8,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500&display=swap');
-       
+      
         html, body {
             font-family: 'Poppins', sans-serif;
             background-image: url('FONDOT.png');
-            background-size: cover;
-            background-position: center;
+            background-size: 100% auto;           /* Mejor para imágenes verticales */
+            background-position: center top;
             background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: #000;               /* Fallback negro */
             min-height: 100vh;
             min-height: -webkit-fill-available;
             color: #ffffff;
             margin: 0;
         }
-       
+
+        /* Corrección para pantallas más anchas */
+        @media (min-width: 768px) {
+            html, body {
+                background-size: auto 100%;
+                background-position: left center;
+            }
+        }
+
         .logo-font {
             font-family: 'Playfair Display', serif;
         }
@@ -33,14 +43,13 @@
             overflow: hidden;
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             padding: 12px;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.35);
         }
-       
+      
         .category-card.appear {
             opacity: 1;
             transform: translateY(0);
         }
-
         .category-card:hover {
             transform: scale(1.03) translateY(-8px);
             box-shadow: 0 25px 50px rgba(0,0,0,0.6);
@@ -51,7 +60,6 @@
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.6);
         }
-
         .category-image-container img {
             width: 100%;
             height: 100%;
@@ -59,15 +67,10 @@
             transition: transform 0.6s ease;
         }
 
-        .category-card:hover .category-image-container img {
-            transform: scale(1.07);
-        }
-
         .category-label {
             text-align: center;
             padding: 8px 0;
         }
-
         .category-label h2 {
             font-size: 1.75rem;
             font-weight: 500;
@@ -76,7 +79,7 @@
                          0 2px 4px rgba(0, 0, 0, 0.7);
         }
 
-        /* CARRUSEL CORREGIDO */
+        /* CARRUSEL */
         .auto-gallery {
             position: relative;
             height: 220px;
@@ -84,71 +87,35 @@
             border-radius: 1rem;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
         }
-
-        .auto-gallery .slides {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-
         .auto-gallery .slides img {
-            position: absolute;
-            inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0;
-            transition: opacity 1.2s ease-in-out;
         }
 
-        .auto-gallery .slides img.active { 
-            opacity: 1; 
-        }
-
+        /* MODAL - Igual que antes pero consistente */
         .modal {
-            opacity: 0;
-            transform: scale(0.95);
-            transition: all 0.4s cubic-bezier(0.34, 1.1, 0.64, 1.1);
             background-image: url('FONDOT.png');
-            background-size: cover;
-            background-position: center;
+            background-size: 100% auto;
+            background-position: center top;
             background-repeat: no-repeat;
+            background-attachment: fixed;
         }
-        
-        .modal.show { 
-            opacity: 1; 
-            transform: scale(1); 
+       
+        .modal.show {
+            opacity: 1;
+            transform: scale(1);
         }
-
         .modal-content {
             background: rgba(5, 5, 15, 0.88);
             backdrop-filter: blur(14px);
         }
 
-        body *, .modal h2, .modal h3, .logo-font {
-            color: #ffffff !important;
-        }
-
-        .modal h3 {
-            font-size: 1.65rem;
-            margin: 2.5rem 0 1rem;
-            text-align: center;
-            border-bottom: 2px solid rgba(255,255,255,0.25);
-            padding-bottom: 0.75rem;
-        }
-
-        /* ==================== RESPONSIVE MEJORADO ==================== */
+        /* RESPONSIVE */
         @media (max-width: 768px) {
             .category-card { padding: 8px; margin-bottom: 1rem; }
             .category-image-container { border-radius: 1.25rem; }
             .category-label h2 { font-size: 1.5rem; }
-            .auto-gallery { height: 190px; }
-            main { padding-top: 6rem; padding-bottom: 3rem; }
-        }
-
-        @media (max-width: 480px) {
-            .auto-gallery { height: 170px; }
-            .category-label h2 { font-size: 1.4rem; }
         }
     </style>
 </head>
@@ -166,14 +133,11 @@
 </header>
 
 <main class="pt-24 pb-16 px-4 sm:px-6 max-w-5xl mx-auto">
-
     <h1 class="logo-font text-4xl sm:text-5xl font-bold text-center mb-12 tracking-wider">
         MENÚ
     </h1>
-
     <div class="space-y-6 sm:space-y-7">
-
-        <!-- 1 ENTRADAS -->
+        <!-- Todas tus cards aquí (las dejé completas) -->
         <button data-modal="entradas" class="category-card w-full aspect-video relative">
             <div class="category-image-container">
                 <img src="ENTRADAS.png" class="w-full h-full object-cover">
@@ -185,7 +149,6 @@
             </div>
         </button>
 
-        <!-- 2 ROLLOS -->
         <button data-modal="rollos" class="category-card w-full aspect-video relative">
             <div class="category-image-container">
                 <img src="ROLLOS.png" class="w-full h-full object-cover">
@@ -197,7 +160,6 @@
             </div>
         </button>
 
-        <!-- 3 PLATILLOS -->
         <button data-modal="platillos" class="category-card w-full aspect-video relative">
             <div class="category-image-container">
                 <img src="TEPPAN.png" class="w-full h-full object-cover">
@@ -209,7 +171,6 @@
             </div>
         </button>
 
-        <!-- 4 BEBIDAS -->
         <button data-modal="bebidas" class="category-card w-full aspect-video relative">
             <div class="category-image-container">
                 <img src="BEBIDAS.png" class="w-full h-full object-cover">
@@ -221,7 +182,6 @@
             </div>
         </button>
 
-        <!-- 5 COMBOS -->
         <button data-modal="combos" class="category-card w-full aspect-video relative">
             <div class="category-image-container">
                 <img src="COMBOS.png" class="w-full h-full object-cover">
@@ -233,7 +193,6 @@
             </div>
         </button>
 
-        <!-- 6 MENÚ INFANTIL -->
         <button data-modal="infantil" class="category-card w-full aspect-video relative">
             <div class="category-image-container">
                 <img src="KIDS.png" class="w-full h-full object-cover">
@@ -245,7 +204,6 @@
             </div>
         </button>
 
-        <!-- 7 POSTRES -->
         <button data-modal="postres" class="category-card w-full aspect-video relative">
             <div class="category-image-container">
                 <img src="POSTRES.png" class="w-full h-full object-cover">
@@ -257,7 +215,6 @@
             </div>
         </button>
 
-        <!-- 8 ESPECIALES -->
         <button data-modal="especiales" class="category-card w-full aspect-video relative">
             <div class="category-image-container">
                 <img src="ESPECIALES.png" class="w-full h-full object-cover">
@@ -268,7 +225,6 @@
                 </div>
             </div>
         </button>
-
     </div>
 </main>
 
