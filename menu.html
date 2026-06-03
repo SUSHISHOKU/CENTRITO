@@ -6,43 +6,37 @@
     <title>Menú - Shoku</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500&display=swap');
       
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         html, body {
             font-family: 'Poppins', sans-serif;
             background: url('FONDOT.png') center top / cover no-repeat fixed !important;
+            background-color: #000 !important;
             min-height: 100vh;
-            min-height: 100dvh;
+            min-height: -webkit-fill-available;
             color: #ffffff;
-            overflow-x: hidden;
-            background-color: #000 !important; /* Fallback negro */
+            margin: 0;
+            padding: 0;
         }
 
-        main, header, .max-w-5xl, .space-y-6, .category-card {
+        /* Evitamos que los contenedores tapen el fondo */
+        main, .max-w-5xl, .space-y-6 {
             background: transparent !important;
         }
 
         .logo-font {
             font-family: 'Playfair Display', serif;
         }
-
         .category-card {
             opacity: 0;
             transform: translateY(80px);
             transition: all 0.9s ease-out;
             border-radius: 1.75rem;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             padding: 12px;
-            background: rgba(0, 0, 0, 0.45) !important;
+            background: rgba(0, 0, 0, 0.35) !important;
         }
       
         .category-card.appear {
@@ -51,9 +45,8 @@
         }
         .category-card:hover {
             transform: scale(1.03) translateY(-8px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
         }
-
         .category-image-container {
             border-radius: 1.5rem;
             overflow: hidden;
@@ -68,7 +61,6 @@
         .category-card:hover .category-image-container img {
             transform: scale(1.07);
         }
-
         .category-label {
             text-align: center;
             padding: 8px 0;
@@ -77,15 +69,64 @@
             font-size: 1.75rem;
             font-weight: 500;
             letter-spacing: 0.04em;
-            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.95),
-                         0 2px 4px rgba(0, 0, 0, 0.8);
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.9),
+                         0 2px 4px rgba(0, 0, 0, 0.7);
         }
 
-        /* Responsive */
+        /* CARRUSEL (lo dejé intacto) */
+        .auto-gallery {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        .auto-gallery .slides {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .auto-gallery .slides img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out;
+        }
+        .auto-gallery .slides img.active {
+            opacity: 1;
+        }
+
+        /* MODAL */
+        .modal {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.4s cubic-bezier(0.34, 1.1, 0.64, 1.1);
+            background: url('FONDOT.png') center top / cover no-repeat fixed !important;
+        }
+       
+        .modal.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .modal-content {
+            background: rgba(5, 5, 15, 0.88);
+            backdrop-filter: blur(14px);
+        }
+
+        /* RESPONSIVE */
         @media (max-width: 768px) {
             .category-card { padding: 8px; margin-bottom: 1rem; }
             .category-image-container { border-radius: 1.25rem; }
             .category-label h2 { font-size: 1.5rem; }
+            .auto-gallery { height: 190px; }
+            main { padding-top: 6rem; padding-bottom: 3rem; }
+        }
+        @media (max-width: 480px) {
+            .auto-gallery { height: 170px; }
+            .category-label h2 { font-size: 1.4rem; }
         }
     </style>
 </head>
@@ -106,7 +147,6 @@
     <h1 class="logo-font text-4xl sm:text-5xl font-bold text-center mb-12 tracking-wider">
         MENÚ
     </h1>
-    
     <div class="space-y-6 sm:space-y-7">
         <!-- 1 ENTRADAS -->
         <button data-modal="entradas" class="category-card w-full aspect-video relative">
