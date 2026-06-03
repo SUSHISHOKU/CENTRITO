@@ -18,9 +18,11 @@
             color: #ffffff;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;           /* Solo horizontal */
+            overflow-y: visible;          /* Scroll vertical habilitado */
         }
 
-        /* Evitamos que los contenedores tapen el fondo */
+        /* Evitamos que nada tape el fondo */
         main, .max-w-5xl, .space-y-6 {
             background: transparent !important;
         }
@@ -28,6 +30,7 @@
         .logo-font {
             font-family: 'Playfair Display', serif;
         }
+
         .category-card {
             opacity: 0;
             transform: translateY(80px);
@@ -47,6 +50,7 @@
             transform: scale(1.03) translateY(-8px);
             box-shadow: 0 25px 50px rgba(0,0,0,0.6);
         }
+
         .category-image-container {
             border-radius: 1.5rem;
             overflow: hidden;
@@ -61,6 +65,7 @@
         .category-card:hover .category-image-container img {
             transform: scale(1.07);
         }
+
         .category-label {
             text-align: center;
             padding: 8px 0;
@@ -73,7 +78,7 @@
                          0 2px 4px rgba(0, 0, 0, 0.7);
         }
 
-        /* CARRUSEL (lo dejé intacto) */
+        /* CARRUSEL */
         .auto-gallery {
             position: relative;
             height: 220px;
@@ -101,19 +106,7 @@
 
         /* MODAL */
         .modal {
-            opacity: 0;
-            transform: scale(0.95);
-            transition: all 0.4s cubic-bezier(0.34, 1.1, 0.64, 1.1);
             background: url('FONDOT.png') center top / cover no-repeat fixed !important;
-        }
-       
-        .modal.show {
-            opacity: 1;
-            transform: scale(1);
-        }
-        .modal-content {
-            background: rgba(5, 5, 15, 0.88);
-            backdrop-filter: blur(14px);
         }
 
         /* RESPONSIVE */
@@ -122,15 +115,10 @@
             .category-image-container { border-radius: 1.25rem; }
             .category-label h2 { font-size: 1.5rem; }
             .auto-gallery { height: 190px; }
-            main { padding-top: 6rem; padding-bottom: 3rem; }
-        }
-        @media (max-width: 480px) {
-            .auto-gallery { height: 170px; }
-            .category-label h2 { font-size: 1.4rem; }
         }
     </style>
 </head>
-<body class="overflow-x-hidden">
+<body>
 
 <header class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
     <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
