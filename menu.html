@@ -9,31 +9,33 @@
     <style>
         @import url('https:f//fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500&display=swap');
        
+        html {
+            background-color: #070605; /* negro base igual al del fondo */
+        }
+
         html, body {
             font-family: 'Poppins', sans-serif;
-            /* Color negro base que coincide con el fondo: rellena toda la pagina larga */
-            background-color: #070605;
-            background-image: url('FONDOT.png');
-            background-position: center top;
-            background-repeat: no-repeat;
-            /* En escritorio cubre toda la pantalla */
-            background-size: cover;
-            background-attachment: fixed;
             min-height: 100vh;
             min-height: -webkit-fill-available;
             color: #ffffff;
             margin: 0;
         }
 
-        /* En el telefono el fondo se veia con demasiado zoom.
-           Aqui lo mostramos a lo ancho, sin recortar ni ampliar,
-           y el color negro de arriba rellena el resto de la pagina. */
-        @media (max-width: 768px) {
-            html, body {
-                background-attachment: scroll;
-                background-size: 100% auto;
-                background-position: top center;
-            }
+        /* Fondo FIJO que cubre toda la pantalla por igual, tanto en celular
+           como en computadora. Al ir en una capa "fixed" se mide segun el
+           tamano de la pantalla (no segun el largo total de la pagina), por
+           eso ya no se amplia de mas NI queda un pedazo en negro: el mismo
+           fondo se ve completo mientras te desplazas. */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background-color: #070605;
+            background-image: url('FONDOT.png');
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
        
         .logo-font {
@@ -75,9 +77,9 @@
         /* ==================== SEPARADORES DORADOS ==================== */
         .gold-divider {
             height: 2px;
-            width: 86%;
-            max-width: 640px;
-            margin: 0.6rem auto;
+            width: 80%;
+            max-width: 560px;
+            margin: 0.15rem auto;
             border: none;
             position: relative;
             background: linear-gradient(90deg,
@@ -206,7 +208,7 @@
 
         /* ==================== RESPONSIVE MEJORADO ==================== */
         @media (max-width: 768px) {
-            .category-card { padding: 8px; margin-bottom: 1rem; }
+            .category-card { padding: 8px; margin-bottom: 0; }
             .category-image-container { border-radius: 1.25rem; }
             .category-label h2 { font-size: 1.5rem; }
             .auto-gallery { height: 190px; }
@@ -238,7 +240,7 @@
         MENÚ
     </h1>
 
-    <div class="space-y-6 sm:space-y-7">
+    <div class="space-y-3 sm:space-y-4">
 
         <!-- 1 ENTRADAS -->
         <button data-modal="entradas" class="category-card w-full aspect-video relative">
